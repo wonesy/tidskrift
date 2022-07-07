@@ -1,0 +1,17 @@
+{
+    "editor.formatOnSave": false,
+    "[python]": {
+        "editor.formatOnSave": true,
+    },
+    "python.formatting.blackPath": "/home/cajon/.cache/pypoetry/virtualenvs/tidskrift-w7LyAGhv-py3.10/bin/black",
+    "python.formatting.blackArgs": [
+        "--line-length",
+        "100"
+    ],
+    "python.formatting.provider": "black",
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}
