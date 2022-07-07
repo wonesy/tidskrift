@@ -2,6 +2,7 @@ from typing import Tuple
 import edgedb
 from tidskrift.db.edgemapper import usermapper
 from tidskrift.model.api.user import NewUser, User
+from tidskrift.util import filtertools
 
 
 async def all(db: edgedb.AsyncIOClient) -> list[User]:
@@ -77,13 +78,9 @@ async def new(db: edgedb.AsyncIOClient, new_user: NewUser) -> User:
     resultset = await db.query(
         """
         with NewUser := (
-            insert User {
-                username := <str>$username,
-                password := <str>$password,
-                first_name := <str>$first_name,
-                last_name := <str>$last_name,
-                email := <str>$email
-            }
+            """
+        + new_user.build_insert_query("User")
+        + """
         )
         select NewUser {
             external_id,
@@ -96,7 +93,7 @@ async def new(db: edgedb.AsyncIOClient, new_user: NewUser) -> User:
             last_login_at
         }
     """,
-        **new_user.dict(),
+        **filtertools.nonones(new_user.dict()),
     )
 
     return usermapper.to_user(resultset[0])
@@ -116,3 +113,7 @@ async def delete_all(db: edgedb.AsyncIOClient, test_mode: bool = False):
     if test_mode is False:
         return
     await db.query("delete User")
+
+
+async def upsert(db: edgedb.AsyncIOClient):
+    pass

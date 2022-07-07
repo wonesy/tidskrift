@@ -19,6 +19,19 @@ async def test_user_queries_create_delete_get(testdb):
     assert fetched is None
 
 
+async def test_user_queries_create_delete_get_with_null_values(testdb):
+    nu = NewUser(
+        username="test-un",
+        password="test-pw",
+    )
+    created = await userquery.new(testdb, nu)
+    await userquery.delete(testdb, created.username)
+    fetched = await userquery.by_username(testdb, created.username)
+
+    assert created.username == nu.username
+    assert fetched is None
+
+
 async def test_user_queries_password(testdb):
     plain_pw = "test-pq"
     nu = NewUser(

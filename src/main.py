@@ -9,5 +9,5 @@ for r in [users.router]:
 
 
 @app.on_event("startup")
-async def setup():
+async def startup():
     init_db()

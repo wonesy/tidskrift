@@ -1,6 +1,8 @@
 import datetime
 import uuid
-from pydantic import BaseModel, SecretStr
+from pydantic import BaseModel
+
+from tidskrift.db.edgemapper.query_builder_mixin import QueryBuilderMixin
 
 
 class User(BaseModel):
@@ -13,7 +15,7 @@ class User(BaseModel):
     last_login_at: datetime.datetime | None
 
 
-class NewUser(BaseModel):
+class NewUser(BaseModel, QueryBuilderMixin):
     username: str
     password: str
     first_name: str | None
