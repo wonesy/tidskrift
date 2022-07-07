@@ -3,7 +3,6 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from tidskrift import auth
 from tidskrift.db import get_db
 
-from tidskrift.db.edgemapper import usermapper
 from tidskrift.model.api.user import NewUser, User
 from tidskrift.db.queries import userquery
 
@@ -19,7 +18,6 @@ async def get_all_users(db: edgedb.AsyncIOClient = Depends(get_db)):
 @router.post("/", response_model=User, status_code=status.HTTP_201_CREATED)
 async def create_new_user(new_user: NewUser, db: edgedb.AsyncIOClient = Depends(get_db)):
     new_user.password = auth.hash_password(new_user.password)
-
     return await userquery.new(db, new_user)
 
 

@@ -3,6 +3,8 @@
     "[python]": {
         "editor.formatOnSave": true,
     },
+    "python.linting.mypyEnabled": true,
+    "python.linting.mypyPath": "/home/cajon/.cache/pypoetry/virtualenvs/tidskrift-w7LyAGhv-py3.10/bin/mypy",
     "python.formatting.blackPath": "/home/cajon/.cache/pypoetry/virtualenvs/tidskrift-w7LyAGhv-py3.10/bin/black",
     "python.formatting.blackArgs": [
         "--line-length",
