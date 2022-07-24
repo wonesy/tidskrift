@@ -8,6 +8,6 @@ async def authenticate_user(db: edgedb.AsyncIOClient, username: str, password: s
     user, hashed_pw = await userquery.by_username_with_password(db, username)
     if not user:
         return None
-    if not verify_password(plain_ws=password, hashed_pw=hashed_pw):
+    if not verify_password(plain_pw=password, hashed_pw=hashed_pw):
         return None
     return user

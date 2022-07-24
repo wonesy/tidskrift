@@ -11,6 +11,7 @@ fastapi = "^0.78.0"
 uvicorn = {extras = ["standard"], version = "^0.18.2"}
 edgedb = "^0.23.0"
 passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 
 [tool.poetry.dev-dependencies]
 black = "^22.6.0"
